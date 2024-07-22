@@ -1,0 +1,108 @@
+QTreeView {
+    alternate-background-color: yellow;
+}
+
+QTreeView {
+    show-decoration-selected: 1;
+}
+
+QTreeView::item {
+     border: 1px solid #d9d9d9;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+QTreeView::item:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #777f8d, stop: 1 #5b6a71);
+    border: 1px solid #bfcde4;
+}
+
+QTreeView::item:selected {
+    border: 1px solid #567dbc;
+}
+
+QTreeView::item:selected:active{
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #5e91e1, stop: 1 #466dac);
+}
+
+QTreeView::item:selected:!active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #5b8bd8, stop: 1 #476faf);
+}
+
+QTreeView::branch {
+    background: palette(base);
+}
+
+QTreeView::branch:has-siblings:!adjoins-item {
+    background: cyan;
+}
+
+QTreeView::branch:has-siblings:adjoins-item {
+
+    background: #1faf0000;
+}
+
+QTreeView::branch:!has-children:!has-siblings:adjoins-item {
+    background: #0000af;
+}
+
+QTreeView::branch:closed:has-children:has-siblings {
+    background: pink;
+}
+
+QTreeView::branch:has-children:!has-siblings:closed {
+    background: gray;
+}
+
+QTreeView::branch:open:has-children:has-siblings {
+    background: magenta;
+}
+
+QTreeView::branch:open:has-children:!has-siblings {
+    background: green;
+}
+
+QTreeView::branch:has-siblings:!adjoins-item {
+    border-image: url(vline.png) 0;
+}
+
+QTreeView::branch:has-siblings:adjoins-item {
+    border-image: url(branch-more.png) 0;
+}
+
+QTreeView::branch:!has-children:!has-siblings:adjoins-item {
+}
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+        border-image: none;
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+        border-image: none;
+}
+
+QHeaderView::section {
+    /*background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #616161, stop: 0.5 #505050,
+                                      stop: 0.6 #434343, stop:1 #656565);*/
+                                      background-color: #434343;
+    color: white;
+    padding-left: 4px;
+    border: 1px solid #6c6c6c;
+}
+
+QHeaderView::section:checked
+{
+    background-color: rgb(68, 38, 38);
+}
+
+/* style the sort indicator */
+QHeaderView::down-arrow {
+    image: url(down_arrow.png);
+}
+
+QHeaderView::up-arrow {
+    image: url(up_arrow.png);
+}

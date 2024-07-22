@@ -1,0 +1,4 @@
+QTabBar::tab:selected {color:#e0e0e0;background:#7f7f7f;}
+QTabBar::tab:!selected {
+    color: #7f9faf;
+    background: #3f3f3f;}

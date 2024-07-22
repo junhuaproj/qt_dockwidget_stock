@@ -1,0 +1,6 @@
+QComboBoxListView
+{
+    border: 2px solid darkgray;
+    selection-background-color: lightgray;
+    min-height: 40px;
+}

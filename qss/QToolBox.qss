@@ -1,0 +1,15 @@
+QToolBox::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #414141, stop: 0.4 #333333,
+                                stop: 0.5 #383838, stop: 1.0 #333333);
+
+                                border: 1px solid #8f8f91;
+
+                                border-radius: 4px;
+    color: #9f9f91;
+}
+
+QToolBox::tab:selected { /* italicize selected tabs */
+    font: normal;
+    color: white;
+}

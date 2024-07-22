@@ -1,0 +1,4 @@
+BaseMdiArea
+{
+    qproperty-myBkColor:rgba(53,53,53,255);
+}

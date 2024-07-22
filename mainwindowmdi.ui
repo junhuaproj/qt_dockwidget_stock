@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowMdi</class>
+ <widget class="QMainWindow" name="MainWindowMdi">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>966</width>
+    <height>598</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>966</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>窗口</string>
+    </property>
+    <addaction name="actionmainwin"/>
+    <addaction name="actiontodaywin"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>视图</string>
+    </property>
+    <widget class="QMenu" name="menuviewmain">
+     <property name="title">
+      <string>main</string>
+     </property>
+     <addaction name="actionmaintool"/>
+     <addaction name="actionmainstock"/>
+     <addaction name="actionmainminute"/>
+    </widget>
+    <addaction name="menuviewmain"/>
+    <addaction name="actiondock"/>
+    <addaction name="actionupdateqss"/>
+   </widget>
+   <widget class="QMenu" name="menusubwin">
+    <property name="title">
+     <string>subwin</string>
+    </property>
+    <addaction name="actioncascadesubwin"/>
+    <addaction name="actiontilesubwin"/>
+    <addaction name="actiontablemode"/>
+    <addaction name="actioncloseall"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menusubwin"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionmainwin">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>主窗口</string>
+   </property>
+  </action>
+  <action name="actionmaintool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>docktool</string>
+   </property>
+  </action>
+  <action name="actionmainstock">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>dockstock</string>
+   </property>
+  </action>
+  <action name="actionmainminute">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>dockminute</string>
+   </property>
+  </action>
+  <action name="actioncascadesubwin">
+   <property name="text">
+    <string>cascadesubwin</string>
+   </property>
+  </action>
+  <action name="actiontilesubwin">
+   <property name="text">
+    <string>tilesubwin</string>
+   </property>
+  </action>
+  <action name="actiontablemode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>tablemode</string>
+   </property>
+  </action>
+  <action name="actioncloseall">
+   <property name="text">
+    <string>closeall</string>
+   </property>
+  </action>
+  <action name="actiondock">
+   <property name="text">
+    <string>dock</string>
+   </property>
+  </action>
+  <action name="actionupdateqss">
+   <property name="text">
+    <string>updateqss</string>
+   </property>
+  </action>
+  <action name="actiontodaywin">
+   <property name="text">
+    <string>todaywin</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
