@@ -18,7 +18,9 @@
 #include "mysqldata/mystockindex.h"
 #include "mysqldata/mystockprop.h"
 #include "data/parserjsondata.h"
+#include "appconfig.h"
 
+#include <QMessageBox>
 using namespace std::placeholders;
 namespace data{
 const char* data_root="F:\\stock";
@@ -26,7 +28,15 @@ DataLoader::DataLoader()
 {
 #ifdef DB_MYSQL
     mydb=new MyDB(this);
-    mydb->open("root","wang1950","localhost","stockv2");
+    QString user,pw,server,db;
+    if(appConfig.readMysqlCfg(user,pw,server,db))
+        mydb->open(user.toStdString().c_str(),
+                   pw.toStdString().c_str(),
+                   server.toStdString().c_str(),db.toStdString().c_str());
+    else
+    {
+        QMessageBox::about(NULL,"db","read mysql cfg error /config/dbcfg.json");
+    }
 
 #endif
     beginXls();

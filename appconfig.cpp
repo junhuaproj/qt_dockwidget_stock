@@ -37,6 +37,29 @@ AppConfig::~AppConfig()
     delete translator;
     delete cfgQss;
 }
+bool AppConfig::readMysqlCfg(QString& user,QString& pw,QString& server,QString& db)
+{
+    QString path=QString("%1\\config\\dbcfg.json").arg(dataRoot);
+    QFile f(path);
+    if(f.open(QFile::ReadOnly))
+    {
+        QByteArray data=f.readAll();
+        f.close();
+        QJsonDocument doc=QJsonDocument::fromJson(data);
+        if(!doc.isObject())
+        {
+            return false;
+        }
+        QJsonObject obj=doc.object();
+        user=obj.value("user").toString();
+        pw=obj.value("pw").toString();
+        server=obj.value("server").toString();
+        db=obj.value("db").toString();
+        return true;
+    }
+    return false;
+
+}
 
 const QList<HttpAddressItem*>* AppConfig::getTradeAddress()const
 {

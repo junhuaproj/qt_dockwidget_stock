@@ -30,6 +30,7 @@ public:
     virtual ~AppConfig();
 
     const QString& cfgPath()const;
+    bool readMysqlCfg(QString& user,QString& pw,QString& server,QString& db);
     void getCfgTodayStock(QString& path)const;
     bool doTranslator(const QString& file);
     inline const AppConfigQSS* qss(){return cfgQss;}
