@@ -1,4 +1,8 @@
-/**分时线*/
+/**
+ * 分时线
+ * 可显示多天的
+ * 如果是当日的折线图，可用覆盖空数据，价格0的不会绘制，根据时间推移，折线逐渐延长
+*/
 #ifndef STOCKMINUTECHART_H
 #define STOCKMINUTECHART_H
 
@@ -36,11 +40,26 @@ public:
     void paintVReferLine(QPainter* painter,const QRectF& chartRect);
 
     void reset();
+    /**
+     * 增加一天的价格数据
+    */
     void addDay(StockDayMinute* day);
+    /**
+     * 增加多天的价格数据
+    */
     void addDays(QList<StockDayMinute*>& days);
 
+    /**
+     * 重新计算区间
+    */
     void reCalcRange();
+    /**
+     * 重新计算价格区间
+    */
     void reCalcPriceRange(float& min,float& max)const;
+    /**
+     * 重新计算成交量区间
+    */
     void reCalcVolumeRange(int32_t& min,int32_t& max)const;
     int32_t getValueCount()const;
     void setValueCount(int32_t count);
@@ -71,9 +90,18 @@ public:
     //bool pointToPos(const QRectF& rc,const QPoint& pt,MinChartPos* curPos);
     StockDayMinute* lastDay();
 
+    /**
+     * 数据是否有效
+    */
     virtual bool isDataValid()const;
+    /**
+     * 索引是否有效
+    */
     virtual bool isIndexValid(int index)const;
     //virtual int getViewCount()const;
+    /**
+     * 获取指定视图Y坐标的数值
+    */
     virtual float getYValue(int view,float yPos);
 
     virtual bool getRangeDescribe(const ChartPos* start,const ChartPos* end,QString& out)const;
@@ -100,12 +128,29 @@ protected:
     int32_t volumeMin;
     int32_t volumeMax;
 
+    /**
+     * 总成交量
+    */
     double totalVolume;
+    /**
+     * 总成交额
+    */
     double totalFund;
+    /**
+     * 绘图的价格比例
+    */
     float priceRate;
+    /**
+     * 成交量比例
+    */
     float volumeRate;
-
+    /**
+     * 开价
+    */
     float openPrice;
+    /**
+     * 昨收
+    */
     float preClose;
 
     bool showCurrStatus;

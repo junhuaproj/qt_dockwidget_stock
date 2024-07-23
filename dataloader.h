@@ -43,19 +43,39 @@ public:
 #endif
     void loadStockIndex();
 
+    /**
+     * 加载图表绘图配置
+    */
     bool loadDayChartDrawParam(QList<chart::StatisticIndexCfg*>& cfgs);
+    /**
+     * 保存图表绘图配置
+    */
     void saveDayChartDrawParam(const QList<chart::StatisticIndexCfg*>& cfgs);
-
+    /**
+     * json数组写入文件
+    */
     bool write(const QJsonArray& arr,const QString& path);
+    /**
+     * 文件中读取json到数组
+    */
     bool readJson(QByteArray& data,const QString& path);
     bool loadTodayStocks(QStringList& stocks);
     bool saveTodayStocks(const QList<StockListItem*>& stocks);
 
     void clear();
+    /*
+     * 清空股票
+    */
     void clearStockList();
 
+    /*
+     * 上市公司简介
+    */
     bool loadStockInformation(const StockListItem* pItem,StockInformation &info);
 
+    /*
+     * 通过编号查找股票
+    */
     StockListItem* findStock(const QString& code);
     StockListItem* findStockById(int id);
     void findStockList(const QStringList& codes,QList<StockListItem*>* stocks);
@@ -65,10 +85,8 @@ public:
     void filterStock(QList<StockListItem*>* stocks,uint32_t flag,const QString& filter="");
     void filterStock(QList<StockListItem*>* src,QList<StockListItem*>* dst,uint32_t flag,const QString& filter="");
 
-
     static QList<StockListItem*>::iterator findStockByCode(QList<StockListItem*>* stocks,const QString& code);
     static StockListItem* findStockItemByCode(QList<StockListItem*>* stocks,const QString& code);
-
 
     float* loadDatePrice(const QDate& date,const QString& prefix,int* outCount);
 protected:
@@ -82,7 +100,13 @@ protected:
     void endXls();
 protected:
     QStringList blackList;
+    /*
+     * 股票列表
+    */
     QList<StockListItem*> stockList;
+    /*
+     * 指数列表
+    */
     QList<StockListItem*> indexList;
 };
 bool find_code_func(StockListItem* p,const QString& code);

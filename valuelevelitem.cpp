@@ -123,26 +123,26 @@ void ValueLevelItem::clear()
         children->pop_back();
     }
 }
-ValueItemLevelThree::ValueItemLevelThree(float center)
+ValueItemLevelTree::ValueItemLevelTree(float center)
     :levelCenter(center)
 {
     levelCount=3;
     items=new ValueLevelItem[levelCount]();
 }
 
-ValueItemLevelThree::~ValueItemLevelThree()
+ValueItemLevelTree::~ValueItemLevelTree()
 {
     delete []items;
 }
 
-void ValueItemLevelThree::resetGroupData()
+void ValueItemLevelTree::resetGroupData()
 {
     dataCount=0;
     for(int i=0;i<levelCount;i++)
         items[i].resetData();
 }
 
-void ValueItemLevelThree::setDataToTree(QTreeWidget* tree)
+void ValueItemLevelTree::setDataToTree(QTreeWidget* tree)
 {
     QTreeWidgetItem* item;
     //tree->setColumnCount(2);
@@ -167,7 +167,7 @@ void ValueItemLevelThree::setDataToTree(QTreeWidget* tree)
         tree->addTopLevelItem(item);
     }
 }
-void ValueItemLevelThree::addChildTreeItem(QTreeWidget* tree,QTreeWidgetItem* parent,
+void ValueItemLevelTree::addChildTreeItem(QTreeWidget* tree,QTreeWidgetItem* parent,
                                             QList<ValueLevelItem*>* children )
 {
     QString title;
@@ -190,14 +190,14 @@ void ValueItemLevelThree::addChildTreeItem(QTreeWidget* tree,QTreeWidgetItem* pa
         }
     }
 }
-void ValueItemLevelThree::setRange(int count,float* range)
+void ValueItemLevelTree::setRange(int count,float* range)
 {
     items[0].setRange(count,range,-1);
     items[1].setRange(count,range,0);
     items[2].setRange(count,range,1);
 }
 
-void ValueItemLevelThree::group(const float* values,int count)
+void ValueItemLevelTree::group(const float* values,int count)
 {
     for(int i=0;i<count;i++)
     {
@@ -212,7 +212,7 @@ void ValueItemLevelThree::group(const float* values,int count)
     }
     dataCount+=count;
 }
-void ValueItemLevelThree::group(const double* values,int count)
+void ValueItemLevelTree::group(const double* values,int count)
 {
     for(int i=0;i<count;i++)
     {
@@ -227,7 +227,7 @@ void ValueItemLevelThree::group(const double* values,int count)
     }
     dataCount+=count;
 }
-void ValueItemLevelThree::setPie(QPieSeries* pie)
+void ValueItemLevelTree::setPie(QPieSeries* pie)
 {
     QString title;
     for(int i=0;i<levelCount;i++)

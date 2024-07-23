@@ -50,11 +50,15 @@ protected:
     //QListWidget* listWidget;
     QTabWidget* tabWidget;
 
+    /**
+     * 比例的饼图
+    */
     QChartView* chartView;
 
     int stockCount;
+    //涨跌幅分类
     QList<PriceItem*> priceClasses;
-    ValueItemLevelThree levels;
+    ValueItemLevelTree levels;
 signals:
 };
 

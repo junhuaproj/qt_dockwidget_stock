@@ -32,11 +32,11 @@ protected:
     int compare;
 };
 
-class ValueItemLevelThree
+class ValueItemLevelTree
 {
 public:
-    ValueItemLevelThree(float center);
-    virtual ~ValueItemLevelThree();
+    ValueItemLevelTree(float center);
+    virtual ~ValueItemLevelTree();
 
     void setRange(int count,float* range);
     void group(const float* values,int count);

@@ -22,15 +22,7 @@ public:
     virtual int getCfgCount();
     virtual bool getCfgValue(int index,IndexCfgValue* cfgValue)const;
     virtual bool setCfgValue(int index,const IndexCfgValue* cfgValue);
-    /*virtual DataValueType getCfgType(int cfgIndex);
-    virtual bool getCfgValue(int index,QString& name,uint32_t& v,QString& description);
-    virtual bool getCfgValue(int index,QString& name,QString& v,QString& description);
-    virtual bool getCfgValue(int index,QString& name,int& v,QString& description);
 
-    virtual bool setCfgValue(int index,uint32_t v);
-    virtual bool setCfgValue(int index,const QString& v);
-    virtual bool setCfgValue(int index,int v);
-*/
     uint16_t getSlow()const;
     uint16_t getFast()const;
     uint16_t getDea()const;

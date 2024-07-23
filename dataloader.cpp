@@ -170,6 +170,11 @@ void DataLoader::clearStockList()
         delete stockList.back();
         stockList.pop_back();
     }
+    while(!indexList.isEmpty())
+    {
+        delete indexList.back();
+        indexList.pop_back();
+    }
     // while(!notes.isEmpty())
     // {
     //     delete notes.back();

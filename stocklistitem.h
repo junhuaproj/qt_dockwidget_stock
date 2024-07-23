@@ -34,11 +34,11 @@ public:
     //inline StockListItem& operator=(StockListItem& src)
     void set(const StockListItem* src);
 
-    bool isShanghai()const;
-    bool isShenzhen()const;
+    bool isShanghai()const;//沪市
+    bool isShenzhen()const;//深市
     void toString(QString& str)const;
 
-    bool filter(uint32_t flag,const QString& key);
+    bool filter(uint32_t flag,const QString& key);//关键字查询
     // double getLastPrice() const;
     // void setLastPrice(double newLastPrice);
 

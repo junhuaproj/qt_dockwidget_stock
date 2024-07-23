@@ -75,7 +75,7 @@ void IndexCfgValue::setFloat(const QString& name,float v,const QString& descript
     type=DataValue_Flt;
     vFlt=v;
 }
-
+//增加参考线
 PReferLine getNewReferLine(ReferLines* pLines)
 {
     PReferLine line;

@@ -25,13 +25,6 @@ public:
 
     //static void calcMA(vector<PStockDayItem>& stockDays,int maIndex,int maSize);
     static void calcMA(const double* closes,double* ma,int maSize,uint32_t count);
-
-    static void algorithm_main();
-	static void algorithm_test(const char* code);
-    static void algorithm_macd(const char* dbPath, const QString& outPath);
-    static double calcMACDwork(std::vector<PStockDayItem>& stockDays, const QString& outPath);
-
-    static void calcKdj(std::vector<PStockDayItem>& dayItems,uint16_t lastDay);
 };
 //过滤选项，基本不用了，通过Python实现更加灵活，高效
 namespace stockfilter{

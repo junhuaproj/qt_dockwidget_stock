@@ -16,25 +16,7 @@
 
 class StockListItem;
 
-/*class ValueLevelItem
-{
-public:
-    ValueLevelItem();
-    ValueLevelItem(float level,int compare);
-    virtual ~ValueLevelItem();
-    void getTitle(QString& title);
-    //QString title;
-    bool testValue(int index,float v);
-    void setRange(int count,float* range,int compare);
-    float level;
-    int compare;
-    int count;
-    QList<int> indexes;
 
-    QList<ValueLevelItem*>* children;
-    void clear();
-};
-*/
 class StockPChgLevelWidget : public BaseWidget
 {
     Q_OBJECT
@@ -49,7 +31,7 @@ public:
 protected:
     void setTree();
     void addChildTreeItem(QTreeWidgetItem* parent,QList<ValueLevelItem*>* children );
-    ValueItemLevelThree levels;
+    ValueItemLevelTree levels;
     //int levelCount;
     //ValueLevelItem* levels;
     //int valueCount;

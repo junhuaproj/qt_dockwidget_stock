@@ -1,5 +1,5 @@
 /*
- * 统计指标配置
+ * 统计指标参数配置
 */
 #ifndef STATISTICINDEX_H
 #define STATISTICINDEX_H
@@ -18,11 +18,14 @@ class IndexCfgValue
 public:
     IndexCfgValue();
     virtual ~IndexCfgValue();
+    //整数类型
     void getInt(QString& name,int32_t& v,QString& description);
+    //字符串类型
     void getStr(QString& name,QString& v,QString& description);
 
+    //颜色
     void getColor(QString& name,uint32_t& v,QString& description);
-
+    //浮点型
     void getFloat(QString& name,float& v,QString& description);
 
     void setInt(const QString& name,int32_t v,const QString& description="");
@@ -32,12 +35,19 @@ public:
 
     void setFloat(const QString& name,float v,const QString& description="");
 
+    //名称
     QString name;
+    //字符串类型的值
     QString vStr;
+    //颜色，无符号32位整型
     uint32_t vClr;
+    //32位有符号整数
     int32_t  vInt;
+    //浮点数
     float vFlt;
+    //类型
     DataValueType type;
+    //字段描述
     QString description;
 };
 inline float JsonValueToFloat(const QJsonValue& val,float defVal=0)
@@ -83,42 +93,66 @@ inline void InsertStrToJson(QJsonObject* parent,const QString& key,const QString
 // {
 
 // };
-
+/*整数指标参数配置接口*/
 struct StatisticIndexCfg
 {
+    //从json加载配置
     virtual bool loadCfg(QJsonObject* obj)=0;
+    //保存到json对象
     virtual bool saveCfg(QJsonObject* obj)=0;
+    //配置名称
     virtual const char* cfgName()const=0;
+    //配置ID
     virtual const char* getIndexId()const=0;
+    //加载默认配置
     virtual bool loadDefault()=0;
+    //获得配置项数
     virtual int getCfgCount()=0;
+    //获得指定配置索引的值
     virtual bool getCfgValue(int index,IndexCfgValue* cfgValue)const=0;
+    //设置指定配置索引的值
     virtual bool setCfgValue(int index,const IndexCfgValue* cfgValue)=0;
-    //virtual DataValueType getCfgType(int cfgIndex)=0;
-    //virtual bool getCfgValue(int index,QString& name,uint32_t& v,QString& description)=0;
-    //virtual bool getCfgValue(int index,QString& name,QString& v,QString& description)=0;
-    //virtual bool getCfgValue(int index,QString& name,int& v,QString& description)=0;
-
-    //virtual bool setCfgValue(int index,uint32_t v)=0;
-    //virtual bool setCfgValue(int index,const QString& v)=0;
-    //virtual bool setCfgValue(int index,int v)=0;
 };
+/*
+ * K线图中统计指标
+*/
 struct IStatisticIndex{
+    /*
+     * 初始化，一般是需要准备计算结果数据的内存
+    */
     virtual void init(const StockDayData* stock)=0;
+    /*
+     * 反初始化，清理内存
+    */
     virtual void deInit()=0;
 
     virtual bool isFinished()const=0;
+    /**
+     * 指标ID
+    */
     virtual const char* getIndexId()const=0;
+    /**
+     * 指标名称
+    */
     virtual const char* getTitle()const=0;
+    /**
+     * 重新计算指标
+    */
     virtual void reCalcIndex()=0;
+    /**
+     * 重新计算显示区间的最大小值
+    */
     virtual void reCalcRange(int start,int count)=0;
+    /*
+     * 获得显示的数值区间
+    */
     virtual const StockFloatRange* getRange()=0;
+    /*
+     * 获得指定索引的数值描述，已经显示数值的颜色
+    */
     virtual void getItemDescription(int index,QList<ColorString*>& strings)=0;
     virtual ChartDraw* getChartDraw()=0;
     virtual StatisticIndexCfg* getCfg()=0;
-    //virtual void paint(const PaintParam& p,DayChartDrawParam* draw)=0;
-    ////
-
 };
 
 class StatisticIndex:public IStatisticIndex
