@@ -48,16 +48,7 @@ void TodayMinuteRunnable::run()
         day=pool->getStockDayMinute(pStock);
         parser.parseMinuteData(request.data(),day);
         pool->stockDayMinuteUpdate(pStock,day);
-        //request.
-        /*while(!net.isExit())
-        {
-            QThread::msleep(100);
-            if(request.tryLock())
-                break;
-        }*/
-        // request.lock();
-        // request.unlock();
-        //wait=50;
+
         while((wait--)>0&&!pool->isExit())
             QThread::msleep(100);
         //QThread::msleep(5000);

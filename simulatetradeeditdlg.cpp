@@ -33,9 +33,9 @@ void TradeEditDlg::setTrade(int row,SimulateTrade* trade)
     this->row=row;
     this->trade=trade;
 
-    ui->dateEditBuy->setDate(QDate::fromString(trade->buyDate,date_format));
+    ui->dateEditBuy->setDate(QDate::fromString(trade->buyDate,appConfig.getDateFormat()));
     ui->spinBoxBuy->setValue(trade->buyPrice);
-    ui->dateEditSell->setDate(QDate::fromString(trade->sellDate,date_format));
+    ui->dateEditSell->setDate(QDate::fromString(trade->sellDate,appConfig.getDateFormat()));
     ui->spinBoxSell->setValue(trade->sellPrice);
     ui->textEditNote->setText(trade->note);
 }
@@ -45,9 +45,9 @@ void TradeEditDlg::onBtnDelete(bool)
 }
 void TradeEditDlg::onBtnSave(bool)
 {
-    trade->buyDate=ui->dateEditBuy->date().toString(date_format);
+    trade->buyDate=ui->dateEditBuy->date().toString(appConfig.getDateFormat());
     trade->buyPrice=ui->spinBoxBuy->value();
-    trade->sellDate=ui->dateEditSell->date().toString(date_format);
+    trade->sellDate=ui->dateEditSell->date().toString(appConfig.getDateFormat());
     trade->sellPrice=ui->spinBoxSell->value();
     trade->note=ui->textEditNote->placeholderText();
     emit tradeSave(this,row,trade);

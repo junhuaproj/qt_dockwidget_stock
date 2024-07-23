@@ -81,7 +81,7 @@ void SimulateTradeDockWidget::onSaveTrades(bool)
 {
     QJsonObject root;
     root.insert("lastdate",
-                QJsonValue(QDateTime::currentDateTime().toString(datetime_format)));
+                QJsonValue(QDateTime::currentDateTime().toString(appConfig.getDateTimeFormat())));
     QJsonArray arr;
     QList<SimulateTrade*>::const_iterator it= trades.begin(),end=trades.end();
     for(;it!=end;it++)

@@ -66,19 +66,7 @@ void TodayPriceRunnable::run()
         parser.parsePriceData(request.data(),pool->getLastStatus(),get_Last_Status_by_Stock,this);
         pool->unlock();
         pool->onLastStatusUpdated(newStatus);
-        //parser.parsePriceData(request.data(),stockLastStatus);
-        //pool->addStockMinute(pStock,stockLastStatus);
-        //stockLastStatus.clear();
-        //request.
-        /*while(!net.isExit())
-        {
-            QThread::msleep(100);
-            if(request.tryLock())
-                break;
-        }*/
-        // request.lock();
-        // request.unlock();
-        //wait=50;
+
         while((wait--)>0&&!pool->isExit())
             QThread::msleep(100);
         //QThread::msleep(5000);

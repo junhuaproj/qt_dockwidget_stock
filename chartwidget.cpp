@@ -1,7 +1,7 @@
 #include "chartwidget.h"
 #include <QMouseEvent>
 #include <QPainter>
-
+#include "appconfig.h"
 ChartWidget::ChartWidget(int viewCnt,QWidget *parent)
     : QWidget(parent)
 {
@@ -10,7 +10,8 @@ ChartWidget::ChartWidget(int viewCnt,QWidget *parent)
     chartCfg.bg=0x333333;
     chartCfg.fore=0xffffff;
     chartCfg.fontSize=9;
-    strcpy(chartCfg.fontFace,"宋体");
+    QString chartFont=appConfig.getChartFont();
+    strcpy(chartCfg.fontFace,chartFont.toStdString().c_str());// "宋体");
     this->viewCount=viewCnt;
     this->rcViews=new QRectF[viewCnt]();
 }

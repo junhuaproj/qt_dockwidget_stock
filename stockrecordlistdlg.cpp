@@ -59,7 +59,7 @@ void StockRecordListDlg::accept()
 void StockRecordListDlg::setRecordList(const data::StockRecordList* list)
 {
     ui->lineEditTitle->setText(list->getTitle());
-    ui->lineEditDateTime->setText(list->getDatetime().toString(datetime_format));
+    ui->lineEditDateTime->setText(list->getDatetime().toString(appConfig.getDateTimeFormat()));
     ui->textEditContent->setText(list->getContent());
     ui->spinBoxLevel->setValue(list->getLevel());
 

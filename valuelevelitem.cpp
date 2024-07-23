@@ -280,28 +280,4 @@ void ValueItemLevelThree::setPie(QPieSeries* pie)
             pie->append(slice);
         }
     }
-#if 0
-    int count=priceClasses.size();
-    int zero_index=count/2;
-    int colorStep=127/(zero_index-1);
-    for(int index=0;it!=end;it++,index++)
-    {
-        QPieSlice* slice=new QPieSlice((*it)->title,(*it)->percent*100/stockCount);
-        slice->setLabelVisible();
-        if(index==zero_index)
-            slice->setColor(Qt::gray);
-        else if(index<zero_index)
-            slice->setColor(QColor(0,127+colorStep*index,0));
-        else
-        {
-            uint8_t red=255-colorStep*(index-zero_index);
-            slice->setColor(QColor(red,0,0));
-        }
-        pie->append(slice);
-
-        text=QString("%1:%2 =%3%").arg((*it)->title).arg((*it)->percent)
-                   .arg((*it)->percent*100.0/((float)stockCount),0,'f',2);
-        listWidget->addItem(text);
-    }
-#endif
 }

@@ -238,8 +238,8 @@ void StockFilterDlg::onSearch(bool)
     {
         QDateTime begin=ui->dateEditBegin->dateTime(),end=ui->dateEditEnd->dateTime();
         where=QString("crdate between %1 and %2")
-                    .arg(begin.toString(date_format))
-                    .arg(end.toString(date_format));
+                    .arg(begin.toString(appConfig.getDateFormat()))
+                    .arg(end.toString(appConfig.getDateFormat()));
 
         //pDataLoad->getRecordDb()->getStockRecords(items,&begin,&end);
     }
@@ -248,14 +248,8 @@ void StockFilterDlg::onSearch(bool)
     if(ui->radioList->isChecked())
     {
         isList=true;
-#ifdef DB_MYSQL
-
         pDataLoad->getDB()->getRecordLists(where,lists);
-#else
-        QString sql=QString("select rowid,crdate,level,title,content from stocklist %1")
-                          .arg(where);
-        pDataLoad->getRecordDb()->getRecordLists(sql,lists);
-#endif
+
         QList<data::StockRecordList*>::iterator it= lists.begin(),end=lists.end();
         ui->tableWidget->setRowCount(lists.size());
         ui->tableWidget->setColumnCount(4);
@@ -266,7 +260,7 @@ void StockFilterDlg::onSearch(bool)
             pTableItem->setData(TABLE_DATA_LIST,QVariant((uint64_t)(*it)));
             ui->tableWidget->setItem(row,0,pTableItem);
 
-            pTableItem=new QTableWidgetItem((*it)->getDatetime().toString(datetime_format));
+            pTableItem=new QTableWidgetItem((*it)->getDatetime().toString(appConfig.getDateTimeFormat()));
             ui->tableWidget->setItem(row,1,pTableItem);
 
             pTableItem=new QTableWidgetItem(QString("%1").arg((*it)->getLevel()));
@@ -276,112 +270,9 @@ void StockFilterDlg::onSearch(bool)
             ui->tableWidget->setItem(row,3,pTableItem);
         }
     }
-#if 0
-    else
-    {
-#ifdef DB_MYSQL
-        pDataLoad->getRecordDb()->getStockRecords(where,items);
-        QList<data::StockRecordItem*>::iterator it=items.begin(),endit=items.end();
-        QList<StockListItem*> stocks;
-        //QStringList codes;
-        for(;it!=endit;it++)
-        {
-            //去除重复的
-            if(stocks.end()==std::find(stocks.begin(),stocks.end(),(*it)->getStock()))
-                stocks.append((StockListItem*)(*it)->getStock());
 
-            //row++;
-        }
-        while(!items.isEmpty())
-        {
-            delete items.back();
-            items.pop_back();
-        }
-        setResultCodes(stocks);
-#else
-        QString sql=QString("select rowid,crdate,parent,level,code,content,keyval,condtion from stockrecord %1")
-                          .arg(where);
-
-        pDataLoad->getRecordDb()->getStockRecords(sql,items);
-
-        QList<data::StockRecordItem*>::iterator it=items.begin(),endit=items.end();
-        QStringList codes;
-        for(;it!=endit;it++)
-        {
-            //去除重复的
-            if(codes.end()==std::find(codes.begin(),codes.end(),(*it)->getCode()))
-                codes.append((*it)->getCode());
-
-            //row++;
-        }
-        while(!items.isEmpty())
-        {
-            delete items.back();
-            items.pop_back();
-        }
-        setResultCodes(codes);
-#endif
-    }
-#endif
 }
-#if 0
-void StockFilterDlg::getResultList(QList<StockListItem*>& lists)
-{
-    //if(ui->tableWidget->columnCount()<2)return;
-    if(this->lists.size()==0)
-    {
-        int rowCount=ui->tableWidget->rowCount();
-        QTableWidgetItem* pItem;
-        QVariant var;
-        StockListItem* pStock;
-        for(int i=0;i<rowCount;i++)
-        {
-            pItem=ui->tableWidget->item(i,0);
-            var=pItem->data(TABLE_DATA_COL_2);
-            pStock=(StockListItem*)qvariant_cast<uint64_t>(var);
-            if(pStock)
-            {
-                lists.append(pStock);
-            }
-        }
-    }
-    else// if(lists.size()>0)
-    {
-        QList<data::StockRecordList*>::iterator it=this->lists.begin(),end=this->lists.end();
 
-        for(;it!=end;it++)
-        {
-            pDataLoad->getRecordDb()->getStockRecordsByParent((*it)->getId(),items);
-        }
-        QList<data::StockRecordItem*>::iterator itItem=items.begin(),endit=items.end();
-#ifdef DB_MYSQL
-        //QStringList codes;
-        for(;itItem!=endit;itItem++)
-        {
-            //去除重复的
-            if(lists.end()==std::find(lists.begin(),lists.end(),(*itItem)->getStock()))
-                lists.append((StockListItem*)(*itItem)->getStock());
-
-            //row++;
-        }
-
-        //pDataLoad->findStockList(codes,&lists);
-#else
-        QStringList codes;
-        for(;itItem!=endit;itItem++)
-        {
-            //去除重复的
-            if(codes.end()==std::find(codes.begin(),codes.end(),(*itItem)->getCode()))
-                codes.append((*itItem)->getCode());
-
-            //row++;
-        }
-
-        pDataLoad->findStockList(codes,&lists);
-#endif
-    }
-}
-#endif
 void StockFilterDlg::onFilter(bool)
 {
     emit apply(this);
@@ -393,121 +284,11 @@ void StockFilterDlg::closeEvent(QCloseEvent* event)
 }
 void StockFilterDlg::onParse(bool)
 {
-#if 0
-    QString text=ui->textEditJson->toPlainText();
-    QJsonDocument doc=QJsonDocument::fromJson(text.toUtf8());
-    if(doc.isArray())
-    {
-        QJsonArray arr=doc.array();
 
-        QString code;
-        QStringList codes;
-        for(int i=0;i<arr.size();i++)
-        {
-            QJsonValue item=arr.at(i);
-            /*if(item.isArray())
-            {
-                QJsonArray itemAttrs=item.toArray();
-                if(col<itemAttrs.size())
-                {
-                    col=itemAttrs.size();
-                    ui->tableWidget->setColumnCount(col);
-                }
-                for(int j=0;j<itemAttrs.size();j++)
-                {
-
-                }
-            }
-            else
-            {*/
-            code=item.toString();
-#ifdef DB_MYSQL
-            codes.append(code);
-#else
-            if(!pDataLoad->isBlackList(code))
-                codes.append(code);
-#endif
-            //pItem=new QTableWidgetItem(item.toString());
-            //ui->tableWidget->setItem(i,0,pItem);
-            //}
-        }
-#ifdef DB_MYSQL
-        QList<StockListItem*> stocks;
-        pDataLoad->findStockList(codes,&stocks);
-        setResultCodes(stocks);
-#else
-        setResultCodes(codes);
-#endif
-    }
-#endif
 }
 
-#ifdef DB_MYSQL
 void StockFilterDlg::setResultCodes(const QList<StockListItem*>& stocks)
 {
-#if 0
-    ui->tableWidget->setColumnCount(2);
-    ui->tableWidget->setRowCount(stocks.size());
-    QTableWidgetItem* pItem;
-    StockListItem* pStock;
 
-    for(int i=0;i<stocks.size();i++)
-    {
-        QString colText;
-
-        pStock=stocks.at(i);
-        pItem=new QTableWidgetItem();
-        if(pStock)
-        {
-            if(pStock->getName().contains("ST")&&!ui->checkBoxRemoveST->isChecked())
-                colText=colText+tr("ST--")+pStock->getName();
-            //pItem=new QTableWidgetItem(tr("ST--")+pStock->getName());
-            else
-            {
-                colText=colText+pStock->getName();
-                //pItem=new QTableWidgetItem(pStock->getName());
-                //pItem->setData(TABLE_DATA_COL_2,QVariant((uint64_t)pStock));
-            }
-            pItem->setData(TABLE_DATA_COL_2,QVariant((uint64_t)pStock));
-            //ui->tableWidget->setItem(i,1,pItem);
-        }
-        pItem->setText(colText);
-        ui->tableWidget->setItem(i,0,pItem);
-    }
-#endif
 }
-#else
-void StockFilterDlg::setResultCodes(const QStringList& codes)
-{
-    ui->tableWidget->setColumnCount(2);
-    ui->tableWidget->setRowCount(codes.size());
-    QTableWidgetItem* pItem;
-    StockListItem* pStock;
-    QList<StockListItem*> stocks;
-    pDataLoad->findStockList(codes,&stocks);
-    for(int i=0;i<codes.size();i++)
-    {
-        QString colText;
-        colText=codes.at(i);
 
-        pStock=stocks.at(i);
-        pItem=new QTableWidgetItem();
-        if(pStock)
-        {
-            if(pStock->getName().contains("ST")&&!ui->checkBoxRemoveST->isChecked())
-                colText=colText+tr("ST--")+pStock->getName();
-                //pItem=new QTableWidgetItem(tr("ST--")+pStock->getName());
-            else
-            {
-                colText=colText+pStock->getName();
-                //pItem=new QTableWidgetItem(pStock->getName());
-                //pItem->setData(TABLE_DATA_COL_2,QVariant((uint64_t)pStock));
-            }
-            pItem->setData(TABLE_DATA_COL_2,QVariant((uint64_t)pStock));
-            //ui->tableWidget->setItem(i,1,pItem);
-        }
-        pItem->setText(colText);
-        ui->tableWidget->setItem(i,0,pItem);
-    }
-}
-#endif

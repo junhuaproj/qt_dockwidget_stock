@@ -5,21 +5,25 @@
 #include <QDir>
 #include <QApplication>
 #include "data/parserjsondata.h"
-const char* datetime_format="yyyy-MM-dd hh:mm:ss";
-const char* date_format="yyyy-MM-dd";
+//const char* datetime_format="yyyy-MM-dd hh:mm:ss";
+//const char* date_format="yyyy-MM-dd";
 
 AppConfig appConfig;
 
 AppConfig::AppConfig(QObject *parent)
     : QObject(parent),cfgQss(NULL)
 {
+    //默认股票路径
     stockRoot="f:\\stock";
+    chartFont="宋体";
     dataRoot=QDir::currentPath();
-    dataRoot=dataRoot.replace("/","\\");
-    dataRoot=dataRoot.replace("\\debug","");
+    dataRoot=dataRoot.replace("/","\\");//适应Windows环境的文件路径
+    dataRoot=dataRoot.replace("\\debug","");//调试时要删除debug目录
 
     qssRoot=dataRoot+"\\qss";
     cfgRoot=dataRoot+"\\config";
+
+    loadCfg();
     cfgQss=new AppConfigQSS(qssRoot);
     translator=new QTranslator();
 
@@ -36,6 +40,39 @@ AppConfig::~AppConfig()
 {
     delete translator;
     delete cfgQss;
+    free(priceLevelRange);
+}
+const QString& AppConfig::getChartFont()const
+{
+    return chartFont;
+}
+bool AppConfig::loadCfg()
+{
+    QString path=QString("%1\\config\\appcfg.json").arg(dataRoot);
+    QFile f(path);
+    if(f.open(QFile::ReadOnly))
+    {
+        QByteArray data=f.readAll();
+        f.close();
+        QJsonDocument doc=QJsonDocument::fromJson(data);
+        if(!doc.isObject())
+        {
+            return false;
+        }
+        QJsonObject obj=doc.object();
+        stockRoot=obj.value("stockroot").toString();
+        dateFormat=obj.value("dateformat").toString();
+
+        datetimeFormat=obj.value("datetimeformat").toString();
+        chartFont=obj.value("chartFont").toString();
+        return true;
+    }
+    return false;
+}
+
+const QString& AppConfig::getStockRoot()const
+{
+    return stockRoot;
 }
 bool AppConfig::readMysqlCfg(QString& user,QString& pw,QString& server,QString& db)
 {
@@ -157,50 +194,4 @@ void TodayMinuteCfg::setUpdateTimeout(int newUpdateTimeout)
 {
     updateTimeout = newUpdateTimeout;
 }
-#if 0
-void changeWidgetTheme(QWidget* widget,const char* theme,int level)
-{
-#define NO_QSS_LEN  13
-    const char noqss[NO_QSS_LEN][24]={"QScrollBar","QHeaderView","QToolButton","QCheckBox","QRadioButton",
-                                        "QScrollArea","QToolBoxButton","QDockWidgetTitleButton","QLabel","QSplitterHandle",
-                                        "QLineEdit","QScrollBar","QToolButton"};
-    QObjectList objs= widget->children();
-    IMainWidgetQSS* qsswidget;
-    QWidget* wid;
-    const AppConfigQSS* qss=appConfig.qss();
-    for(auto obj:objs)
-    {
-        if(!obj->isWidgetType())
-            continue;
 
-        const QMetaObject* meta= obj->metaObject();
-
-        qDebug()<<meta->className();
-        wid=(QWidget*)obj;
-        for(int i=0;i<NO_QSS_LEN;i++)
-        {
-            if(strcmp(meta->className(),noqss[i])==0)
-                goto loopfinish;
-//                goto next;
-        }
-        qsswidget=dynamic_cast<IMainWidgetQSS*>(wid);
-        if(qsswidget)
-        {
-            //qDebug()<<"qss theme:"<<meta->className();
-            qss->loadQSS(wid,qsswidget->qssName());
-            qsswidget->reloadQss(theme);
-            continue;
-        }
-        else if(strcmp(meta->className(),"QWidget")==0||!qss->loadQSS(wid,meta->className()))
-        {
-            qDebug()<<"can't find theme:"<<meta->className();
-        }
-        //else continue;
-    next:
-        if(level<5)
-            changeWidgetTheme(wid,theme,level+1);
-    loopfinish:
-        ;
-    }
-}
-#endif

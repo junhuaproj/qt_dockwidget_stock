@@ -38,7 +38,6 @@ SOURCES += \
     chartstatusdockwidget.cpp \
     chartthemedlg.cpp \
     chartwidget.cpp \
-    config/httpaddressitem.cpp \
     data/parserjsondata.cpp \
     data/parserrecordlist.cpp \
     data/stockdayminute.cpp \
@@ -67,6 +66,7 @@ SOURCES += \
     mysqldata/mystockprop.cpp \
     mysqldata/mystockrecord.cpp \
     mysqldata/mystockrecordlist.cpp \
+    net/httpaddressitem.cpp \
     net/netbaserequest.cpp \
     netrequest.cpp \
     qtablecombobox.cpp \
@@ -137,7 +137,6 @@ HEADERS += \
     chartstatusdockwidget.h \
     chartthemedlg.h \
     chartwidget.h \
-    config/httpaddressitem.h \
     data/TableStockMember.h \
     data/parserjsondata.h \
     data/parserrecordlist.h \
@@ -170,6 +169,7 @@ HEADERS += \
     mysqldata/mystockprop.h \
     mysqldata/mystockrecord.h \
     mysqldata/mystockrecordlist.h \
+    net/httpaddressitem.h \
     net/netbaserequest.h \
     netrequest.h \
     qtablecombobox.h \

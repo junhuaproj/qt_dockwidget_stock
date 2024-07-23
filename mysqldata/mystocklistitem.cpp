@@ -1,7 +1,7 @@
 #include "mystocklistitem.h"
 
 #include "stocklistitem.h"
-//#include "stocknote.h"
+
 #include <string>
 #include <QDate>
 #include <QTime>
@@ -12,13 +12,11 @@
 #define STOCKLIST_FIELD_COUNT   7
 
 
-//#define STOCKLIST_FIELD_COUNT   7
 MyStockListItem::MyStockListItem(MyDB* db)
     :MyData(db)
 {
 
 }
-
 
 MyStockListItem::~MyStockListItem()
 {

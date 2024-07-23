@@ -143,8 +143,8 @@ void UserStartWnd::onDayChartMainSelectedRange(ChartWidget* chart,ChartPos* star
             int startIndex=dayChart->getStartIndex();
             const char* startDate=date[startIndex+start->xIndex].date;
             const char* endDate=date[startIndex+end->xIndex].date;
-            QDate date1=QDate::fromString(startDate,date_format);
-            QDate date2=QDate::fromString(endDate,date_format);
+            QDate date1=QDate::fromString(startDate,appConfig.getDateFormat());
+            QDate date2=QDate::fromString(endDate,appConfig.getDateFormat());
             double close=0;
             if(start->xIndex>0)
                 close=stockDay.getCloses()[startIndex+start->xIndex-1];

@@ -23,7 +23,7 @@
 #include <QMessageBox>
 using namespace std::placeholders;
 namespace data{
-const char* data_root="F:\\stock";
+//const char* data_root="F:\\stock";
 DataLoader::DataLoader()
 {
 #ifdef DB_MYSQL
@@ -112,7 +112,7 @@ bool DataLoader::saveTodayStocks(const QList<StockListItem*>& stocks)
 
 bool DataLoader::loadDayChartDrawParam(QList<chart::StatisticIndexCfg*>& cfgs)
 {
-    QString path=QString("%1\\drawcfg.json").arg(data_root);
+    QString path=QString("%1\\drawcfg.json").arg(appConfig.getStockRoot());
     QFile f(path);
     if(f.open(QFile::ReadOnly))
     {
@@ -149,7 +149,7 @@ void DataLoader::saveDayChartDrawParam(const QList<chart::StatisticIndexCfg*>& c
         root.insert((*it)->getIndexId(),index);
     }
     QJsonDocument doc(root);
-    QString path=QString("%1\\drawcfg.json").arg(data_root);
+    QString path=QString("%1\\drawcfg.json").arg(appConfig.getStockRoot());
     QFile f(path);
     if(f.open(QFile::WriteOnly))
     {
@@ -200,7 +200,7 @@ bool DataLoader::loadStockInformation(const StockListItem* pItem,StockInformatio
     info.setName(pItem->getName());
 
     ParserJsonData parser;
-    QString path=QString("%1\\stockinfo\\%2.json").arg(data_root,pItem->getCode());
+    QString path=QString("%1\\stockinfo\\%2.json").arg(appConfig.getStockRoot(),pItem->getCode());
     parser.parserStockInfo(path,info);
     //informationLoader->loadInformation(pItem->getCode(),info);
 
@@ -319,7 +319,7 @@ StockListItem* DataLoader::findStockItemByCode(QList<StockListItem*>* stocks,con
 
 float* DataLoader::loadDatePrice(const QDate& date,const QString& prefix,int* outCount)
 {
-    QString path=QString("%1\\stockdaystatus\\%3%2.json").arg(data_root,date.toString("yyyy-MM-dd"),prefix);
+    QString path=QString("%1\\stockdaystatus\\%3%2.json").arg(appConfig.getStockRoot(),date.toString("yyyy-MM-dd"),prefix);
     QFile file(path);
     if(file.open(QFile::ReadOnly))
     {

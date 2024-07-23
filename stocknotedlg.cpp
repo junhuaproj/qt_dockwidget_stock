@@ -18,7 +18,7 @@ StockNoteDlg::StockNoteDlg(const StockListItem* stock,QWidget *parent)
 
     if(stock->getComment().length())
     {
-        ui->labelLastDate->setText(stock->getCommentDate().toString(date_format));
+        ui->labelLastDate->setText(stock->getCommentDate().toString(appConfig.getDateFormat()));
         ui->plainTextEdit->setPlainText(stock->getComment());
         ui->spinBoxLevel->setValue(stock->getCommentLevel());
     }

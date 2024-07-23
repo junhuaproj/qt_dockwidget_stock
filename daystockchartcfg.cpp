@@ -1,4 +1,5 @@
 #include "daystockchartcfg.h"
+#include "appconfig.h"
 
 namespace chart {
 enum ChartCfgVal
@@ -94,7 +95,8 @@ bool DayStockChartCfg::loadDefault()
     pChartCfg->fore=0xffffff;
     pCfg->referline=0xffff00;
     pChartCfg->fontSize=10;
-    strcpy(pChartCfg->fontFace,"宋体");
+    QString chartFont;
+    strcpy(pChartCfg->fontFace,chartFont.toStdString().c_str());// "宋体");
     pCfg->up=0xff0000;
     pCfg->down=0x00ff00;
     pCfg->viewTopPadding=12;

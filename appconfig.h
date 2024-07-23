@@ -18,7 +18,7 @@ enum FilterCompareType{
 };
 
 #include <QTranslator>
-#include "config/httpaddressitem.h"
+#include "net/httpaddressitem.h"
 #include "widget/ithemewidget.h"
 class QJsonArray;
 class AppConfigQSS;
@@ -41,7 +41,18 @@ public:
     void updateQss(IThemeWidget* itheme)const;
 
     void getTableStockColumnNames(const TableStockMember* columns,int col_count,QStringList& titles);
+    const QString& getStockRoot()const;
+
+    inline const QString& getDateFormat(){
+        return dateFormat;
+    }
+    inline const QString& getDateTimeFormat()
+    {
+        return datetimeFormat;
+    }
+    const QString& getChartFont()const;
 protected:
+    bool loadCfg();
 //涨跌幅分级
     int priceLevelCount;
     float* priceLevelRange;
@@ -51,10 +62,14 @@ protected:
     AppConfigQSS* cfgQss;
     QTranslator  *translator;
 
-    QString qssRoot;
-    QString cfgRoot;
-    QString dataRoot;
-    QString stockRoot;
+    QString qssRoot;//qss文件目录
+    QString cfgRoot;//其他配置文件
+    QString dataRoot;//应用程序目录
+    QString stockRoot;//数据
+
+    QString dateFormat;//日期格式
+    QString datetimeFormat;//日期时间格式
+    QString chartFont;//图表字体
 signals:
 };
 /*
@@ -85,7 +100,7 @@ protected:
 };
 
 extern AppConfig appConfig;
-extern const char* datetime_format;
-extern const char* date_format;
+//extern const char* datetime_format;
+//extern const char* date_format;
 //void changeWidgetTheme(QWidget* widget,const char* theme,int level);
 #endif // APPCONFIG_H

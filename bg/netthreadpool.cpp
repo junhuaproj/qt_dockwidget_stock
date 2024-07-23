@@ -350,7 +350,7 @@ StockLastStatus* NetThreadPool::newStockLastStatus(const StockListItem* stock)
     lastStatus.push_back(status);
     return status;
 }
-
+//根据待更新数量确定更新时间间隔
 int NetThreadPool::getWaitTimer(uint32_t taskType)const
 {
     switch(taskType)

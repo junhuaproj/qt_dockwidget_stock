@@ -46,7 +46,7 @@ bool DataLoaderLocal::loadCode(minutechart::StockDayMinute** day,const QDate& da
         prefix="cn";
     }
     QString minutePath=QString("%1%4\\sohuday\\%2\\%5_%3.json")
-                             .arg(data::data_root,
+                             .arg(appConfig.getStockRoot(),// data::data_root,
                                   date.toString("yyyyMMdd"),
                                   pItem->getCode(),
                                   dir,prefix);

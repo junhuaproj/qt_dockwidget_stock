@@ -12,8 +12,7 @@ StockMinuteChart::StockMinuteChart(QWidget *parent)
     : ChartWidget(MINUTE_VIEW_COUNT,parent),pStock(NULL)
     ,priceMin(FLT_MAX),priceMax(0)
     ,volumeMin(FLT_MAX),volumeMax(0)
-    //,chartLeft(50),chartTop(30),chartBottom(30)
-    //,chartRight(40),openPrice(0)
+
     ,preClose(0),
     showCurrStatus(0),pricePercent(80),bTitleVisible(true)
 {
@@ -119,10 +118,7 @@ bool StockMinuteChart::isIndexValid(int index)const
 {
     return index>=0&&index<prices.size();
 }
-// int StockMinuteChart::getViewCount()const
-// {
-//     return prices.size();
-// }
+
 float StockMinuteChart::getYValue(int view,float yPos)
 {
     QRectF rc=rcViews[view];
@@ -141,20 +137,7 @@ float StockMinuteChart::getYValue(int view,float yPos)
     double zero_y=rc.bottom()-(rate*(zero_v-priceMin));
     return zero_v+(zero_y-yPos)/rate;
 }
-/*void StockMinuteChart::setTitle(const QString& title)
-{
-    this->title=title;
-}
-void StockMinuteChart::getChartRect(QRectF& rc)
-{
-    QRect rcClient=rect();
-    rc.setLeft(chartLeft);
-    rc.setTop(chartTop);
-    rc.setWidth(rcClient.width()-chartLeft-chartRight);
-    rc.setHeight(rcClient.height()-chartTop-chartBottom);
 
-}
-*/
 
 void StockMinuteChart::paintMargin(QPainter* painter,const QRectF& rcChart,const QRectF& rc)
 {
@@ -163,7 +146,7 @@ void StockMinuteChart::paintMargin(QPainter* painter,const QRectF& rcChart,const
     painter->drawText(rcChart.left(),rc.top(),rcChart.width(),
                       rcChart.top()-rc.top(),Qt::AlignCenter,title);
 }
-//void StockMinuteChart::paintEvent(QPaintEvent* event)
+
 void StockMinuteChart::paintCharts(QPainter* painter,const QRectF& rcChart)
 {
     painter->save();
@@ -228,7 +211,7 @@ void StockMinuteChart::paintVReferLine(QPainter* painter,const QRectF& chartRect
         painter->drawLine(xleft,chartRect.top(),
                          xleft,chartRect.bottom());
         rcText.setRight(xleft);
-        painter->drawText(rcText,(*it)->date.toString(date_format),option);
+        painter->drawText(rcText,(*it)->date.toString(appConfig.getDateFormat()),option);
     }
 
 }
@@ -425,11 +408,6 @@ bool StockMinuteChart::getItemDescribe(const ChartPos *pos,QString& out)const
               .arg(price->getVolume());
     return true;
 }
-//void StockMinuteChart::clearXChartLabels();
-//void addXChartLabel(int value,const QString& label);
-
-//    float getPreClosePrice() const;
-//void setPrices(float preClosePrice,float open,float high,float low);
 
 void StockMinuteChart::setCurrStatus(bool bShow)
 {

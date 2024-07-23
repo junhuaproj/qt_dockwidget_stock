@@ -21,7 +21,7 @@ StockRecordDlg::StockRecordDlg(const StockListItem* stock,data::StockRecordItem*
     {
         ui->spinBoxLevel->setValue(pRecord->getLevel());
         ui->lineEditCondition->setText(pRecord->getCondtion());
-        ui->lineEditDateTime->setText(pRecord->getDatetime().toString(datetime_format));
+        ui->lineEditDateTime->setText(pRecord->getDatetime().toString(appConfig.getDateTimeFormat()));
         ui->lineEditKeyWord->setText(pRecord->getKey());
         ui->textEditContent->setText(pRecord->getText());
     }

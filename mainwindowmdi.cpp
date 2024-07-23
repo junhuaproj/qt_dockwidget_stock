@@ -44,7 +44,7 @@ MainWindowMdi::MainWindowMdi(QWidget *parent)
     connect(ui->actiontodaywin,SIGNAL(triggered(bool)),this,SLOT(onActionTodayWin(bool)));
 
     this->setWindowTitle("statistic");
-
+    //启动线程池
     netThreadPool=new NetThreadPool(&dataLoader);
 }
 

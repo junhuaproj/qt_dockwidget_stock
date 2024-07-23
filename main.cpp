@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     //qss.doTranslator("lang_cn.qm");
+    //指定翻译的语言
     appConfig.doTranslator("lang_cn.qm");
 
     MainWindowMdi w;

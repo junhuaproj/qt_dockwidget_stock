@@ -150,7 +150,7 @@ void MyData::stringTomysql_time(MYSQL_TIME* dt,const char* s)
 }
 void MyData::stringTomysql_time(MYSQL_TIME* dt,const QString& s)
 {
-    QDateTime date=QDateTime::fromString(s,datetime_format);
+    QDateTime date=QDateTime::fromString(s,appConfig.getDateTimeFormat());
     daeTimeTomysql_time(dt,date);
 }
 void MyData::daeTimeTomysql_time(MYSQL_TIME* dt,const QDateTime& datetime)

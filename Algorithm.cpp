@@ -5,7 +5,7 @@
 //#include "cJSON.h"
 #include <QFile>
 #include <QDirIterator>
-
+#include <appconfig.h>
 #include <float.h>
 
 #ifndef MAX_PATH
@@ -16,7 +16,8 @@ int Algorithm::loadStockDataFromSQLiteForCode(const QString& code, std::vector<P
 {
     char inpath[MAX_PATH];
     //sprintf_s(inpath, "F:\\stock\\sqlite\\cn_%s.db",
-    sprintf_s(inpath, "F:\\stock\\sqlite\\%s_%s.db",
+    QString stockPath=appConfig.getStockRoot();
+    sprintf_s(inpath, "%s\\sqlite\\%s_%s.db",stockPath.toStdString().c_str(),
               type.toStdString().c_str(),code.toStdString().c_str());
     return loadStockDataFromSQLite(inpath,stockDays);
 }
