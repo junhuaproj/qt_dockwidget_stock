@@ -138,7 +138,7 @@ bool BiasStatisticIndexCfg::setCfgValue(int index,const IndexCfgValue* cfgValue)
 {
     const int lineIndex=index%BIAS_KEY_NUM;
 
-    QString key=QString("%1%2").arg(biasNames[lineIndex]).arg(lineIndex+1);
+    //QString key=QString("%1%2").arg(biasNames[lineIndex]).arg(lineIndex+1);
     switch(lineIndex)
     {
     case 0:

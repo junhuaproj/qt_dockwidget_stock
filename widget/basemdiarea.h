@@ -1,5 +1,5 @@
 /*
- * 为动态加载qss
+ * 为动态加载qss,设置背景色
 */
 #ifndef BASEMDIAREA_H
 #define BASEMDIAREA_H

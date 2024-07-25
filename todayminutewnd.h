@@ -37,7 +37,7 @@ public:
     void addStocks(QList<StockListItem*>& stocks);
     bool isStockExist(StockListItem* pItem);
 
-    void loadChart(StockChartView* pChart,StockListItem* pItem);
+    //void loadChart(StockChartView* pChart,StockListItem* pItem);
 
     virtual void getThemingWidget(QList<QWidget*>& wids)const;
     virtual void getDockWidgets(QList<QDockWidget*>& docks);

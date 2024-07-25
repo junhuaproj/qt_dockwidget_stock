@@ -4,7 +4,7 @@
 #include <QJsonArray>
 
 class StockListItem;
-class StockChartView;
+//class StockChartView;
 class StockLastStatus;
 
 namespace minutechart

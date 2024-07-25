@@ -14,14 +14,15 @@ AppConfig::AppConfig(QObject *parent)
     : QObject(parent),cfgQss(NULL)
 {
     //默认股票路径
-    stockRoot="f:\\stock";
-    chartFont="宋体";
+    stockRoot=tr("f:\\stock");
+    chartFont=tr("宋体");
+    stockTdx=tr("E:\\zd_pazq_hy\\vipdoc");
     dataRoot=QDir::currentPath();
     dataRoot=dataRoot.replace("/","\\");//适应Windows环境的文件路径
     dataRoot=dataRoot.replace("\\debug","");//调试时要删除debug目录
 
-    qssRoot=dataRoot+"\\qss";
-    cfgRoot=dataRoot+"\\config";
+    qssRoot=dataRoot+tr("\\qss");
+    cfgRoot=dataRoot+tr("\\config");
 
     loadCfg();
     cfgQss=new AppConfigQSS(qssRoot);
@@ -48,7 +49,7 @@ const QString& AppConfig::getChartFont()const
 }
 bool AppConfig::loadCfg()
 {
-    QString path=QString("%1\\config\\appcfg.json").arg(dataRoot);
+    QString path=QString(tr("%1\\config\\appcfg.json")).arg(dataRoot);
     QFile f(path);
     if(f.open(QFile::ReadOnly))
     {
@@ -65,6 +66,7 @@ bool AppConfig::loadCfg()
 
         datetimeFormat=obj.value("datetimeformat").toString();
         chartFont=obj.value("chartFont").toString();
+        stockTdx=obj.value("tdxpath").toString();
         return true;
     }
     return false;
@@ -76,7 +78,7 @@ const QString& AppConfig::getStockRoot()const
 }
 bool AppConfig::readMysqlCfg(QString& user,QString& pw,QString& server,QString& db)
 {
-    QString path=QString("%1\\config\\dbcfg.json").arg(dataRoot);
+    QString path=QString(tr("%1\\config\\dbcfg.json")).arg(dataRoot);
     QFile f(path);
     if(f.open(QFile::ReadOnly))
     {
@@ -104,7 +106,7 @@ const QList<HttpAddressItem*>* AppConfig::getTradeAddress()const
 }
 void AppConfig::getSimulateTradePath(const QString& code,QString& path)const
 {
-    path=QString("%1\\%2\\%3.json").arg(stockRoot,"simulatetrade",code);
+    path=QString(tr("%1\\%2\\%3.json")).arg(stockRoot,"simulatetrade",code);
 }
 
 float* AppConfig::getPriceLevel(int& count)
@@ -142,7 +144,7 @@ void AppConfig::updateQss(IThemeWidget* itheme)const
 void AppConfig::getTableStockColumnNames(const TableStockMember* columns,int col_count,QStringList& titles)
 {
     ParserJsonData parser;
-    QString path=QString("%1\\TableStockMember.json").arg(cfgRoot);
+    QString path=QString(tr("%1\\TableStockMember.json")).arg(cfgRoot);
     QStringList names;
     parser.parserTableStockProp(path,names);
     for(int i=0;i<col_count;i++)

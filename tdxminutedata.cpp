@@ -1,17 +1,17 @@
 #include "tdxminutedata.h"
 #include <QFile>
 #include "stockminutechart.h"
-
+#include "appconfig.h"
 namespace tdx {
-
+//数据结构,总计长度32字节
 #define ITEM_LEN    32
 typedef struct MinuteItem
 {
-    uint16_t date;
-    uint16_t time;
-    float price[4];
-    float amount;
-    uint32_t volume;
+    uint16_t date;//日期
+    uint16_t time;//时间
+    float price[4];//价格open,high,low,close
+    float amount;//成交金额
+    uint32_t volume;//成交量
 }*PMinuteItem;
 
 typedef struct DayItem
@@ -26,7 +26,7 @@ typedef struct DayItem
     uint32_t reserve;
 }*PDayItem;
 
-const char* tdx_doc_root="E:\\zd_pazq_hy\\vipdoc";
+//const char* tdx_doc_root="E:\\zd_pazq_hy\\vipdoc";
 TDXMinuteData::TDXMinuteData() {}
 
 bool TDXMinuteData::loadCode(QList<minutechart::StockDayMinute*>* days,const QDate& start,const QDate& end,const StockListItem* pItem,void* pCreate)
@@ -42,7 +42,7 @@ bool TDXMinuteData::loadCode(QList<minutechart::StockDayMinute*>* days,const QDa
 {
     //const char* root = "E:\\zd_pazq_hy\\vipdoc";
 
-    QString path=QString("%1\\%2\\minline\\%3%4.lc1").arg(tdx_doc_root,dir,dir, code);
+    QString path=QString("%1\\%2\\minline\\%3%4.lc1").arg(appConfig.getTdxPath(),dir,dir, code);
     QFile f(path);
     if(!f.open(QFile::ReadOnly))
     {

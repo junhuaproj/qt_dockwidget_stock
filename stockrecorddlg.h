@@ -1,5 +1,6 @@
 /*
  * 记录Dialog
+ * 修改记录
 */
 #ifndef STOCKRECORDDLG_H
 #define STOCKRECORDDLG_H

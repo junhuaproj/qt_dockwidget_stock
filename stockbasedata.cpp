@@ -64,6 +64,7 @@ void StockBaseData::deInit()
 
 void StockBaseData::reCalcIndex()
 {
+    //计算移动均线
     int begIdx=0,nbeElemet=0;
     for(int i=0;i<maCfgLen;i++)
     {
@@ -128,7 +129,11 @@ double StockBaseData::getZeroY()
 {
     return range.low;
 }
-////
+/**
+ * 间隔线
+ * K线
+ * 移动均线
+*/
 int StockBaseData::chartCount()
 {
     return 2+maLen;

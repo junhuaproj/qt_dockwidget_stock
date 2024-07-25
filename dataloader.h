@@ -8,13 +8,13 @@
 #include <QString>
 #include "stocklistitem.h"
 //#include "todaystock.h"
-#include "idataloader.h"
+//#include "idataloader.h"
 
 #include <QList>
 #include <QMap>
 
-#include "todayminutedataloadersohu.h"
-#include "idataloader.h"
+//#include "todayminutedataloadersohu.h"
+//#include "idataloader.h"
 
 #include "cfgchart.h"
 #include "StatisticIndex.h"

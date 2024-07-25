@@ -115,16 +115,23 @@ void StockSearchWidget::createUI()
     //onCheckFilter(false);
     //qss.loadQSS(tableStock,"tableview");
 }
+//QTableWidget右键菜单
 void StockSearchWidget::onStockContext(QPoint)
 {
     //QAction* actionChart1=new QAction("图表1");
     //QAction* actionChart2=new QAction("图表2");
+    //显示到新窗口
     QAction* actionNewWin=new QAction("new Win");
+    //添加到今日窗口，自动更新实时股价
     QAction* actionAddToDay=new QAction("Add To Today");
+    //添加到对比窗口
     QAction* actionNewWinCompare=new QAction("New Win Compare");
+    //股票备注
     QAction* actionStockNote=new QAction(tr("stock note"));;
+    //添加到黑名单
     QAction* actionStockBlack=new QAction(tr("black list"));;
 
+    //删除，只有在记录列表中才可以删除
     QAction* actionRemoveFromList=NULL;
     //if(checkFilter->isChecked())
     {
@@ -187,7 +194,7 @@ void StockSearchWidget::onColumnChanged()
     tableStock->setColumnCount(columnCount);
     tableStock->setHorizontalHeaderLabels(titles);
 }
-
+//打开记录列表查找窗口
 void StockSearchWidget::onBtnOpenList(bool)
 {
     if(pFilterDlg==NULL)

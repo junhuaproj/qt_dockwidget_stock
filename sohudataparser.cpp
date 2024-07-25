@@ -135,7 +135,7 @@ bool DataParser::parsePriceJsonData(const QJsonObject& obj,QList<StockLastStatus
         if(!callback)
             stocks.push_back(status);
     }
-    return false;
+    return true;
 }
 
 }

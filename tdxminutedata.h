@@ -5,7 +5,7 @@
 #define __TDXMINUTEDATA_H__
 
 #include <QDate>
-#include <stockchartview.h>
+//#include <stockchartview.h>
 #include <vector>
 #include "stocklistitem.h"
 //#include "stockdayitems.h"

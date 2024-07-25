@@ -1,5 +1,7 @@
 /*
- * 分时线设置
+ * 日K线图设置，
+ * 最多有3个图，可调整各图显示比例，或不显示
+ * 选择各图显示的统计指标
 */
 #ifndef DAYCHARTCFGDLG_H
 #define DAYCHARTCFGDLG_H
@@ -25,6 +27,9 @@ protected slots:
 
 protected:
 
+    /*
+     * 下拉列表中增加可选的指标
+    **/
     void initCbxType(QComboBox* pBox,StatisticIndex* pSelected);
 
     const QList<StatisticIndex*> *indexes;

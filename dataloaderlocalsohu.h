@@ -8,7 +8,7 @@
 #include <QDate>
 #include "sohudataparser.h"
 #include "idataloaderminute.h"
-class StockChartView;
+//class StockChartView;
 class StockListItem;
 
 namespace datasohu{

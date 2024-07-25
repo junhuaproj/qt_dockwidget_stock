@@ -12,7 +12,7 @@ TableWidgetItemInt::~TableWidgetItemInt()
 {
 
 }
-
+//排序
 bool TableWidgetItemInt::operator <(const QTableWidgetItem &other)const
 {
     return iValue<((const TableWidgetItemInt*)&other)->getIntValue();

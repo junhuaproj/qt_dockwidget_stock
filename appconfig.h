@@ -51,6 +51,10 @@ public:
         return datetimeFormat;
     }
     const QString& getChartFont()const;
+    inline const QString& getTdxPath()const
+    {
+        return stockTdx;
+    }
 protected:
     bool loadCfg();
 //涨跌幅分级
@@ -66,6 +70,7 @@ protected:
     QString cfgRoot;//其他配置文件
     QString dataRoot;//应用程序目录
     QString stockRoot;//数据
+    QString stockTdx;//通达信数据目录
 
     QString dateFormat;//日期格式
     QString datetimeFormat;//日期时间格式
@@ -98,7 +103,7 @@ protected:
     int rows;
     int columns;
 };
-
+//全局的配置
 extern AppConfig appConfig;
 //extern const char* datetime_format;
 //extern const char* date_format;

@@ -16,11 +16,7 @@ public:
 
     const QDateTime& getDatetime() const;
     void setDatetime(const QDateTime &newDatetime);
-#ifdef DB_MYSQL
-#else
-    const QString& getCode() const;
-    void setCode(const QString &newCode);
-#endif
+
     inline const QString& getText() const
     {
         return text;

@@ -1,3 +1,6 @@
+/*
+ * 加载分时线数据接口，以支持多种来源的数据，例如通达信，其他网络抓取的数据
+*/
 #ifndef IDATALOADERMINUTE_H
 #define IDATALOADERMINUTE_H
 

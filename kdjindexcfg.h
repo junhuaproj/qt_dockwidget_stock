@@ -33,18 +33,35 @@ public:
     virtual bool setCfgValue(int index,const QString& v);
     virtual bool setCfgValue(int index,int v);*/
 
+    /**
+     * K线颜色
+    */
     uint32_t getKColor() const;
-
+    /**
+     * D线颜色
+    */
     uint32_t getDColor() const;
 
+    /**
+     * J线颜色
+    */
     uint32_t getJColor() const;
-
+    /**
+     * Fast K周期
+    */
     int getFaskKday() const;
-
+    /**
+     * Slow K周期
+    */
     int getSLowKday() const;
-
+    /**
+     * Slow D周期
+    */
     int getSlowDday() const;
 
+    /**
+     * 线宽
+    */
     float getLineWidth() const;
 
 protected:

@@ -13,6 +13,9 @@
 namespace chart {
 
 class StockDayChart;
+/**
+ * 绘图工具，参数
+*/
 class PaintParam
 {
 public:
@@ -60,23 +63,25 @@ protected:
     bool* colorType;
 };
 
-
+/**
+ * 坐标点的数值
+*/
 class ColorString
 {
 public:
     ColorString(const QString& t,uint32_t c):text(t),color(c){}
     QString text;
-    uint32_t color;
+    uint32_t color;//显示的颜色
 };
 
 void clearColorStrings(QList<ColorString*>& colors);
-
+//绘图的类型
 enum DataChartType
 {
-    Chart_User,
-    Chart_Line,
-    Chart_Pillar,
-    Chart_Pillar2,
+    Chart_User,//需要接口实现绘图过程，每个数值会调用一次
+    Chart_Line,//折线图，接口实现数据获取，由上层实现绘图
+    Chart_Pillar,//柱型图,接口实现数据获取，由上层实现绘图
+    Chart_Pillar2,//柱型图,接口实现数据获取，由上层实现绘图
 };
 typedef struct ChartLine{
     const double* v;//绘图数值，接口填充，并使用start偏移

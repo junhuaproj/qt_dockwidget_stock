@@ -125,7 +125,9 @@ struct IStatisticIndex{
      * 反初始化，清理内存
     */
     virtual void deInit()=0;
-
+    /*
+     * 数据是否已经准备好
+    */
     virtual bool isFinished()const=0;
     /**
      * 指标ID
@@ -152,6 +154,9 @@ struct IStatisticIndex{
     */
     virtual void getItemDescription(int index,QList<ColorString*>& strings)=0;
     virtual ChartDraw* getChartDraw()=0;
+    /*
+     * 获得指标配置
+    */
     virtual StatisticIndexCfg* getCfg()=0;
 };
 

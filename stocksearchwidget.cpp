@@ -22,9 +22,11 @@
 #include "stockrecordlistdlg.h"
 
 #define LIST_DATA_COLUMN    0
-
+//股票信息
 #define LIST_DATA_STOCK     (Qt::UserRole+1)
+//记录信息
 #define LIST_DATA_RECORD    (Qt::UserRole+2)
+//实时股票状态
 #define LIST_DATA_LAST      (Qt::UserRole+3)
 using namespace std::placeholders;
 
@@ -274,7 +276,12 @@ void StockSearchWidget::attachLastStatus(const QList<StockLastStatus*>& status)
 
 }
 
-
+/**
+ * 显示扩展信息
+ * 所属指数
+ * 概念
+ * 行业
+*/
 void StockSearchWidget::onExtendInfo(bool)
 {
     onColumnChanged();
@@ -571,7 +578,9 @@ void StockSearchWidget::updateRecord(const StockListItem* pStock,data::StockReco
         }
     }
 }
-
+/**
+ * 更新列表
+*/
 void StockSearchWidget::setStockToList(const QList<StockListItem*>* stocks)
 {
     pNetPool->removeStock(stockItems,UPDATE_PRICE,WND_FALG_MAIN);

@@ -79,8 +79,6 @@ SOURCES += \
     stockbasedata.cpp \
     stockchartdraw.cpp \
     stockchartlabel.cpp \
-    stockchartview.cpp \
-    stockcurrinfo.cpp \
     stockday.cpp \
     stockdaychart.cpp \
     stockfilterdlg.cpp \
@@ -103,7 +101,6 @@ SOURCES += \
     tablewidgetitemint.cpp \
     tdxminutedata.cpp \
     todayminutecfgdlg.cpp \
-    todayminutedataloadersohu.cpp \
     todayminutewnd.cpp \
     usermainwnd.cpp \
     userstartwnd.cpp \
@@ -152,7 +149,6 @@ HEADERS += \
     dockwidgetdlg.h \
     filterdata.h \
     filterstockbypercentdlg.h \
-    idataloader.h \
     idataloaderminute.h \
     kdjindex.h \
     kdjindexcfg.h \
@@ -182,8 +178,6 @@ HEADERS += \
     stockbasedata.h \
     stockchartdraw.h \
     stockchartlabel.h \
-    stockchartview.h \
-    stockcurrinfo.h \
     stockday.h \
     stockdaychart.h \
     stockdaydata.h \
@@ -206,7 +200,6 @@ HEADERS += \
     tablewidgetitemint.h \
     tdxminutedata.h \
     todayminutecfgdlg.h \
-    todayminutedataloadersohu.h \
     todayminutewnd.h \
     usermainwnd.h \
     userstartwnd.h \

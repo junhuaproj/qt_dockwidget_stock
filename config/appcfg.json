@@ -2,5 +2,6 @@
     "stockroot":"f:\\stock",
     "dateformat":"yyyy-MM-dd",
     "datetimeformat":"yyyy-MM-dd hh:mm:ss",
-    "chartfont":"宋体"
+    "chartfont":"宋体",
+    "tdxpath":"E:\\zd_pazq_hy\\vipdoc"
 }

@@ -1,6 +1,7 @@
 #include "parserrecordlist.h"
 #include <QFileDialog>
 #include "dataloader.h"
+#include <QJsonDocument>
 
 ParserRecordList::ParserRecordList(data::DataLoader* dataLoader)
     :pDataLoader(dataLoader)

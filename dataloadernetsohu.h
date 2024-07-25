@@ -8,7 +8,7 @@
 #include <QJsonArray>
 #include "sohudataparser.h"
 
-class StockChartView;
+//class StockChartView;
 class StockListItem;
 class StockLastStatus;
 

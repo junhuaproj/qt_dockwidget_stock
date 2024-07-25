@@ -105,7 +105,13 @@ public:
     virtual float getYValue(int view,float yPos);
 
     virtual bool getRangeDescribe(const ChartPos* start,const ChartPos* end,QString& out)const;
+    /*
+     * 得到指定分钟的信息：价格、成交量
+    */
     virtual bool getItemDescribe(const ChartPos* pos,QString& out)const;
+    /*
+     * 得到当前指向价格的分层统计：高于该价格、低于该价格的成交信息
+    */
     virtual bool getItemDescribeEx(const ChartPos* pos,QString& out)const;
 
     //void getCurPriceItemStatus(const ChartPos *pos,QString& out)const;
@@ -123,9 +129,21 @@ protected:
 
     uint8_t pricePercent;
 
+    /**
+     * 最小价格
+    */
     float priceMin;
+    /**
+     * 最大价格
+    */
     float priceMax;
+    /**
+     * 最小成交量
+    */
     int32_t volumeMin;
+    /**
+     * 最大成交量
+    */
     int32_t volumeMax;
 
     /**
@@ -153,6 +171,7 @@ protected:
     */
     float preClose;
 
+    /*是否显示当前选中信息*/
     bool showCurrStatus;
 };
 }
